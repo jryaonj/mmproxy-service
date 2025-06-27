@@ -1,0 +1,15 @@
+# This file defines all mmproxy service instances.
+# Each line represents one instance.
+# Format is TSV (Tab-Separated Values):
+# <instance_name>	<fwmark>	<listen_addr>	<target_ipv4>	<target_port>	<target_ipv6>
+#
+# - instance_name: A unique name for the service (e.g., vps01-ssh).
+# - fwmark: The pathway this instance uses. Must be defined in pathways.conf.
+# - listen_addr: The IP and port mmproxy listens on.
+# - target_ipv4: The local IPv4 address of the target service.
+# - target_port: The port of the target service.
+# - target_ipv6: The local IPv6 address of the target service.
+
+vps01-ssh	123	100.101.102.123:2222	127.0.0.1	22	::1
+vps01-web	123	100.101.102.123:8443	127.0.0.1	443	::1
+router01-ssh	124	100.101.102.123:2223	127.0.0.1	22	::1

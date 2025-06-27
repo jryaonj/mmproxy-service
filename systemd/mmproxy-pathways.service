@@ -1,0 +1,15 @@
+[Unit]
+Description=Setup for mmproxy network pathways
+After=network.target
+
+[Service]
+Type=oneshot
+# Change this to the actual path where you cloned the repository
+ExecStart=/bin/bash /opt/mmproxy/scripts/setup-pathway.sh add-all
+ExecStop=/bin/bash /opt/mmproxy/scripts/setup-pathway.sh del-all
+RemainAfterExit=true
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target 

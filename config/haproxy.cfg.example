@@ -1,0 +1,36 @@
+# This is an example HAProxy configuration for a proxy server (e.g., vps01).
+#
+# It listens for SSH traffic on port 22001 and forwards it to the
+# mmproxy instance running on the workload server (wks01).
+#
+# IMPORTANT: It uses the `send-proxy` keyword to enable the PROXY protocol.
+
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log     global
+    mode    tcp
+    option  tcplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+
+frontend ssh-wks01_in
+    # Listen on the public IP for incoming SSH connections
+    bind :::22001 v4v6
+    default_backend ssh-wks01_out
+
+backend ssh-wks01_out
+    # Forward to the mmproxy instance on wks01.
+    # The port (2222) should match the listening port of the mmproxy instance for vps01.
+    # 'send-proxy' is crucial to send the client's IP information.
+    server wks01_ts 100.101.102.123:2222 send-proxy 

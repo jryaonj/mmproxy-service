@@ -1,0 +1,9 @@
+# This file lists all the mmproxy network pathways that should be created.
+# Each line should contain a single, unique fwmark number.
+# These are the pathways that services (defined in instance-map.tsv) can use.
+#
+# Lines starting with '#' are ignored.
+
+123
+124
+#125 

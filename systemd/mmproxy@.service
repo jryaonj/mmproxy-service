@@ -1,0 +1,20 @@
+[Unit]
+Description=mmproxy for TCP service (instance: %i)
+After=network-online.target
+Wants=network-online.target
+# This service should only start after the policy routing is configured.
+Requires=mmproxy-pathways.service
+After=mmproxy-pathways.service
+
+[Service]
+Type=simple
+User=root
+# Change this to the actual path where you cloned the repository
+WorkingDirectory=/opt/mmproxy/
+# The '%i' is replaced by the instance name (e.g., 'vps01-ssh')
+ExecStart=/bin/bash /opt/mmproxy/scripts/start-mmproxy.sh %i
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target 

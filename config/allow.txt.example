@@ -1,0 +1,10 @@
+# This file contains a list of trusted proxy IPs that are allowed to send
+# PROXY protocol information to mmproxy.
+# Add the private network IPs (e.g., Tailscale IPs) of your proxies here,
+# one per line. Comments are allowed.
+
+# Example: Tailscale IP of vps01
+100.103.104.105
+
+# Example: Tailscale IP of router01
+# 100.x.x.x 
