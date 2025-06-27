@@ -1,0 +1,35 @@
+# IDE and Editor directories
+.vscode/
+.idea/
+.cursor/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Compiled binaries and build artifacts
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Local configuration files
+# These should be created from their .example counterparts
+config/allow.txt
+config/instances.tsv
+config/pathways.conf
+
+# Chat history and user-specific notes
+/chat-history/
+notes.md
+notes.orig.md
+*.log
+
+# Raw data directory
+/raw/
+
+# Go-related files (if building locally)
+go.sum
+go.mod 
