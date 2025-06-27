@@ -1,6 +1,6 @@
-# Local mmproxy Setup for Preserving Client IP
+# mmproxy-service
 
-This project provides a modular and robust set of scripts and configurations to set up `mmproxy`.
+`mmproxy-service` is a set of scripts and configurations that makes it easy to run `mmproxy` as a robust, managed service. It automatically handles the complex network rules (`iptables` and `iproute2`) and `systemd` integration required to preserve the original client IP address for your backend services.
 
 The core concept is a separation of concerns:
 1.  **Network Pathways**: These are the dataflow routes for proxied traffic, defined by a firewall mark (`fwmark`). You create one pathway for each source proxy (e.g., one for `vps01`, one for `router01`). The underlying `ip` and `iptables` rules are managed by the `setup-pathway.sh` script.
@@ -133,7 +133,8 @@ The script is idempotent and will not start a duplicate process if an instance i
 
 This is the recommended way to run `mmproxy`. The `systemd` template `mmproxy@.service` allows you to manage each configured instance.
 
-1.  **Customize Service Files**: Edit `systemd/mmproxy-pathways.service` and `systemd/mmproxy@.service` and change the `WorkingDirectory` and `ExecStart` paths to match your project's location (e.g., `/opt/mmproxy-setup`).
+1.  **Customize Service Files**: Edit `systemd/mmproxy-pathways.service` and `systemd/mmproxy@.service`. You **must** change the `WorkingDirectory` to match your project's location.
+    - For example, change `WorkingDirectory=/opt/mmproxy-setup` to `WorkingDirectory=/opt/mmproxy-service`.
 
 2.  **Install the services**:
     ```bash
